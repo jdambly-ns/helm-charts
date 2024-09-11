@@ -37,7 +37,7 @@ jobs:
         run: helm dependency update ${{ matrix.chart }}
 
       - name: Install Helm chart
-        run: helm install --wait --timeout 60s --dry-run ${{ matrix.chart }}-release ${{ matrix.chart }}
+        run: helm install --wait --timeout 60s ${{ matrix.chart }}-release ${{ matrix.chart }}
 
       - name: Run Helm tests
         run: helm test ${{ matrix.chart }}-release --timeout 60s
