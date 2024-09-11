@@ -3,12 +3,10 @@ name: Helm Charts Test
 on:
   push:
     branches:
-      - main
-      - 'release/**'
+      - master
   pull_request:
     branches:
-      - main
-      - 'release/**'
+      - master
   workflow_dispatch:  # Allows manually triggering the workflow
 
 jobs:
@@ -16,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        chart: [multus,sriov, whereabouts] # Add all your chart directories here
+        chart: [multus, sriov] # Add all your chart directories here
 
     steps:
       - name: Checkout code
