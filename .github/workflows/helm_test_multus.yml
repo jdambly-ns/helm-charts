@@ -1,7 +1,10 @@
-name: Helm Charts Test
+name: Multus Chart Test
 
 on:
   push:
+    paths:
+        - 'multus/**'
+        - '.github/workflows/helm_test_multus.yml'
     branches:
       - master
   pull_request:
@@ -12,9 +15,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        chart: [multus, sriov] # Add all your chart directories here
 
     steps:
       - name: Checkout code
@@ -30,17 +30,14 @@ jobs:
         with:
           version: v0.17.0 # specify the kind version you want to use
 
-      - name: Helm Lint
-        run: helm lint ${{ matrix.chart }}
+      - name: Helm Lint Multus
+        run: helm lint multus
 
-      - name: Install dependencies
-        run: helm dependency update ${{ matrix.chart }}
-
-      - name: Install Helm chart
-        run: helm install --wait --timeout 60s ${{ matrix.chart }}-release ${{ matrix.chart }}
+      - name: Install Helm chart multus
+        run: helm install --wait --timeout 60s multus-release ./multus
 
       - name: Run Helm tests
-        run: helm test ${{ matrix.chart }}-release --timeout 60s
+        run: helm test multus-release --timeout 60s
 
       - name: Delete Helm release
-        run: helm uninstall ${{ matrix.chart }}-release
+        run: helm uninstall multus-release
