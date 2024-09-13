@@ -19,7 +19,9 @@
 #replicaCount: 1
 
 image:
+  # -- Repository for the Multus image.
   repository: ghcr.io/k8snetworkplumbingwg/multus-cni
+  # -- Tag of the Multus image.
   tag: v4.1.0
   pullPolicy: IfNotPresent
 
@@ -48,27 +50,50 @@ pod:
         cpu: "2000m"
 
 args:
+  # -- The directory where CNI binaries are installed.
   cniBinDir: "/host/opt/cni/bin"
+  # -- The directory where CNI configurations are stored.
   cniConfDir: "/host/etc/cni/net.d"
+  # -- Version of the CNI to use.
   cniVersion: ""
+  # -- The configuration file for Multus.
   multusConfFile: "auto"
+  # -- Path to the Multus binary file.
   multusBinFile: "/usr/src/multus-cni/bin/multus"
+  # -- Directory for Multus-specific CNI configurations.
   multusCNIConfDir: "/host/etc/cni/multus/net.d"
+  # -- Whether to skip copying the Multus binary file.
   skipMultusBinaryCopy: false
-
+  # -- Path to the kubeconfig file for Multus.
   multusKubeConfigFileHost: "/etc/cni/net.d/multus.d/multus.kubeconfig"
+  # -- Name of the master CNI file in the Multus auto-configuration directory.
   multusMasterCNIFileName: ""
+  # -- Enable namespace isolation.
   namespaceIsolation: false
+  # -- Comma-separated list of global namespaces for use with namespace isolation.
   globalNamespaces: ""
+  # -- Directory for the Multus auto-configuration.
   multusAutoconfigDir: "/host/etc/cni/net.d"
+  # -- Whether to log to stderr.
   multusLogToStderr: true
+  # -- Log level for Multus.
   multusLogLevel: ""
+  # -- Path to the Multus log file.
   multusLogFile: ""
+  # -- Override the network name from the master CNI file.
   overrideNetworkName: false
+  # -- Cleanup configuration files on exit.
   cleanupConfigOnExit: false
+  # -- Skip watching for configuration changes.
   skipConfigWatch: false
+  # -- Rename the master configuration file to invalidate it.
   renameConfFile: false
+  # -- File used to indicate readiness.
   readinessIndicatorFile: ""
+  # -- Additional directory to include in the CNI binDir option.
   additionalBinDir: ""
+  # -- Skip TLS verification.
   skipTLSVerify: false
+  # -- Force the use of a specific CNI version.
   forceCNIVersion: false
+
