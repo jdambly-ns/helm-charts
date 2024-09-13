@@ -16,8 +16,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-#replicaCount: 1
-
 image:
   # -- Repository for the Multus image.
   repository: ghcr.io/k8snetworkplumbingwg/multus-cni
@@ -38,16 +36,15 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: multus
 
-pod:
-  resources:
-    enabled: false
-    multus:
-      requests:
-        memory: "128Mi"
-        cpu: "250m"
-      limits:
-        memory: "1024Mi"
-        cpu: "2000m"
+resources:
+  enabled: false
+  multus:
+    requests:
+      memory: "128Mi"
+      cpu: "250m"
+    limits:
+      memory: "1024Mi"
+      cpu: "2000m"
 
 args:
   # -- The directory where CNI binaries are installed.
@@ -96,4 +93,12 @@ args:
   skipTLSVerify: false
   # -- Force the use of a specific CNI version.
   forceCNIVersion: false
-
+# -- Node selector for pod assignment.
+nodeSelector: {}
+# -- Tolerations for pod assignment.
+tolerations:
+  - operator: Exists
+    effect: NoSchedule
+# -- securityContext for the pod.
+securityContext:
+  privileged: true

@@ -38,10 +38,13 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      nodeSelector: {{- toYaml .Values.labels.nodeSelector | nindent 8 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector: {{ . }}
+      {{- end }}
+      {{- with .Values.tolerations }}
       tolerations:
-      - operator: Exists
-        effect: NoSchedule
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       serviceAccountName: {{ .Values.serviceAccount.name }}
       containers:
       - name: multus
@@ -123,18 +126,19 @@ spec:
           {{- with .Values.forceCNIVersion }}
           - --force-cni-version={{ . }}
           {{- end }}
-        {{- if .Values.pod.resources.multus }}
-        resources: {{- toYaml .Values.pod.resources.multus | nindent 10 }}
+        {{- with .Values.resources}}
+        resources:
+          {{- toYaml . | nindent 10 }}
         {{- end }}
+        {{- with .Values.securityContext}}
         securityContext:
-          privileged: true
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         volumeMounts:
         - name: cni
           mountPath: /host/etc/cni/net.d
         - name: cnibin
           mountPath: /host/opt/cni/bin
-        - name: multus-cfg
-          mountPath: /tmp/multus-conf
       initContainers:
       - name: install-multus-binary
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
@@ -160,8 +164,5 @@ spec:
         - name: cnibin
           hostPath:
             path: /opt/cni/bin
-        - name: multus-cfg
-          configMap:
-            name: {{ .Release.Name }}-{{ .Chart.Name }}-{{ .Chart.Version }}-config
 {{- end }}
 
