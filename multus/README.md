@@ -35,11 +35,7 @@ Multus Helm chart for Kubernetes
 | image.repository | string | `"ghcr.io/k8snetworkplumbingwg/multus-cni"` | Repository for the Multus image. |
 | image.tag | string | `"v4.1.0"` | Tag of the Multus image. |
 | nodeSelector | object | `{}` | Node selector for pod assignment. |
-| resources.enabled | bool | `false` |  |
-| resources.multus.limits.cpu | string | `"2000m"` |  |
-| resources.multus.limits.memory | string | `"1024Mi"` |  |
-| resources.multus.requests.cpu | string | `"250m"` |  |
-| resources.multus.requests.memory | string | `"128Mi"` |  |
+| resources | object | `{"limits":{"cpu":"500m","memory":"128Mi"},"requests":{"cpu":"250m","memory":"128Mi"}}` | Resources for the Multus pod. |
 | securityContext | object | `{"privileged":true}` | securityContext for the pod. |
 | serviceAccount.name | string | `"multus"` |  |
 | tolerations | list | `[{"effect":"NoSchedule","operator":"Exists"}]` | Tolerations for pod assignment. |
