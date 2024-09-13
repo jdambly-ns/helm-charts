@@ -2,12 +2,10 @@
 {{- if or ( gt .Capabilities.KubeVersion.Major "1" ) ( ge .Capabilities.KubeVersion.Minor "16" ) }}
 1. The following components have been deployed as part of this helm chart:
 Cluster Role: {{ .Values.serviceAccount.name }}
-
 Cluster Role Binding: {{ .Chart.Name }}
 Custom Resource Definition: network-attachment-definitions.k8s.cni.cncf.io
 Daemon Set: {{ .Release.Name }}-{{ .Chart.Name }}-ds
 Service Account: {{ .Values.serviceAccount.name }}
-
 You can now deploy any other CNI and create its Network Attachment Defintion.
 ---------
 
