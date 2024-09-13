@@ -22,4 +22,4 @@ sources:
   - https://github.com/intel/multus-cni
 maintainers:
   - name: Network Plumbing Group
-appVersion: 2.8.0
+appVersion: v4.1.0
