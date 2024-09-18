@@ -1,4 +1,4 @@
-name: Multus Chart Test
+name: Multus-thick Chart Test
 
 on:
   push:
