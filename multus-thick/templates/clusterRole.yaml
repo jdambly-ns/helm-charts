@@ -29,9 +29,12 @@ rules:
       - pods/status
     verbs:
       - get
+      - list
       - update
+      - watch
   - apiGroups:
       - ""
+      - events.k8s.io
     resources:
       - events
     verbs:
