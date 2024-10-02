@@ -31,7 +31,7 @@ jobs:
           version: v0.17.0 # specify the kind version you want to use
 
       - name: Helm Lint SRIOV
-        run: helm lint SRIOV
+        run: helm lint ./sriov
 
       - name: Install Helm chart SRIOV
         run: helm install --wait --timeout 60s sriov-release ./sriov
