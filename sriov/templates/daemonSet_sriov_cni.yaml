@@ -47,7 +47,6 @@ spec:
       - name: kube-{{ .Chart.Name }}-cni
         image: {{ .Values.images.sriovCni.repository }}:{{ .Values.images.sriovCni.tag }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
-        {{- with .Values.securityContext}}
         securityContext:
           allowPrivilegeEscalation: false
           privileged: false
