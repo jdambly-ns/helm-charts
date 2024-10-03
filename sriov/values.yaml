@@ -13,11 +13,12 @@
 # limitations under the License.
 
 images:
-  registry: docker.io
   sriovCni:
+    # sr-iov cni image
     repository: ghcr.io/k8snetworkplumbingwg/sriov-network-device-plugin
     tag: latest
   sriovDevicePlugin:
+    # sr-iov device plugin image
     repository: nfvpe/sriov-device-plugin
     tag: v3.1
   pullPolicy: IfNotPresent
@@ -25,14 +26,14 @@ images:
 serviceAccount:
   name: sriov-device-plugin-test
 
-
+# -- plugin pod resources
 resources:
-    requests:
-      memory: "50Mi"
-      cpu: "100m"
-    limits:
-      memory: "50Mi"
-      cpu: "100m"
+  requests:
+    memory: "50Mi"
+    cpu: "100m"
+  limits:
+    memory: "50Mi"
+    cpu: "100m"
 
 securityContext:
   privileged: true
@@ -52,6 +53,7 @@ config:
     deviceSock: "/var/lib/kubelet/device-plugins/"
     log: "/var/log"
     configVolume: "/etc/pcidp/config.json"
+  # -- Device plugin configuration
   sriov_device_plugin: |
     {
       "resourceList": [
@@ -108,13 +110,11 @@ config:
       ]
     }
 
-
 # -- Tolerations for pod assignment.
 tolerations:
   - operator: Exists
     effect: NoSchedule
   - operator: Exists
     effect: NoExecute
-
 
 affinity: {}
