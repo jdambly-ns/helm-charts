@@ -15,11 +15,11 @@
 images:
   sriovCni:
     # sr-iov cni image
-    repository: ghcr.io/k8snetworkplumbingwg/sriov-network-device-plugin
+    repository: ghcr.io/k8snetworkplumbingwg/sriov-cni
     tag: latest
   sriovDevicePlugin:
     # sr-iov device plugin image
-    repository: nfvpe/sriov-device-plugin
+    repository: ghcr.io/k8snetworkplumbingwg/sriov-network-device-plugin
     tag: v3.1
   pullPolicy: IfNotPresent
 

@@ -49,8 +49,12 @@ spec:
         imagePullPolicy: {{ .Values.images.pullPolicy }}
         {{- with .Values.securityContext}}
         securityContext:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+              - ALL
         resources:
           requests:
               memory: "50Mi"
