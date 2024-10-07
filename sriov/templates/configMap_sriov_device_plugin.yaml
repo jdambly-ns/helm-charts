@@ -18,6 +18,6 @@ metadata:
   name: {{ .Release.Name }}-{{ .Chart.Name }}-{{ .Chart.Version }}-config
   namespace: kube-system
 data:
-  dp-conf.json: |-
-    {{ toJson .Values.config.sriov_device_plugin | nindent 4 }}
+  dp-conf.json: |
+    {{ .Values.config.sriov_device_plugin | nindent 4 }}
 {{- end }}
