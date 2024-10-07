@@ -54,61 +54,26 @@ config:
     log: "/var/log"
     configVolume: "/etc/pcidp/config.json"
   # -- Device plugin configuration
-  sriov_device_plugin: |
-    {
-      "resourceList": [
-        {
-          "resourceName": "intel_sriov_netdevice",
-          "selectors": {
-            "vendors": [
-              "8086"
-            ],
-            "devices": [
-              154c,
-              10ed
-            ],
-            "drivers": [
-              "i40evf",
-              "ixgbevf"
-            ]
-          }
-        },
-        {
-          "resourceName": "intel_sriov_dpdk",
-          "selectors": {
-            "vendors": [
-              "8086"
-            ],
-            "devices": [
-              154c,
-              10ed
-            ],
-            "drivers": [
-              "vfio-pci"
-            ]
-          },
-          "pfNames": [
-            "enp67s0f1#8-31",
-            "enp68s0f0#8-31"
-          ]
-        },
-        {
-          "resourceName": "mlnx_sriov_rdma",
-          "isRdma": true,
-          "selectors": {
-            "vendors": [
-              15b3
-            ],
-            "devices": [
-              "1018"
-            ],
-            "drivers": [
-              "mlx5_ib"
-            ]
-          }
-        }
-      ]
-    }
+  sriov_device_plugin:
+    resourceList:
+    - resourceName: "intel_sriov_netdevice"
+      selectors:
+        vendors: ["8086"]
+        devices: ["154c", "10ed"]
+        drivers: ["i40evf", "ixgbevf"]
+    - resourceName: "intel_sriov_dpdk"
+      selectors:
+        vendors: ["8086"]
+        devices: ["154c", "10ed"]
+        drivers: ["vfio-pci"]
+      pfNames: ["enp67s0f1#8-31", "enp68s0f0#8-31"]
+    - resourceName: "mlnx_sriov_rdma"
+      isRdma: true
+      selectors:
+        vendors: ["15b3"]
+        devices: ["1018"]
+        drivers: ["mlx5_ib"]
+
 
 # -- Tolerations for pod assignment.
 tolerations:
