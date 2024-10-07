@@ -19,5 +19,5 @@ metadata:
   namespace: kube-system
 data:
   dp-conf.json: |-
-    {{ toJson .Values.config.sriov_device_plugin | indent 4 }}
+    {{ toJson .Values.config.sriov_device_plugin | nindent 4 }}
 {{- end }}
