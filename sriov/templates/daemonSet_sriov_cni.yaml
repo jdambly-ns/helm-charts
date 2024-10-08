@@ -48,12 +48,7 @@ spec:
         image: {{ .Values.images.sriovCni.repository }}:{{ .Values.images.sriovCni.tag }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
         securityContext:
-          allowPrivilegeEscalation: false
-          privileged: false
-          readOnlyRootFilesystem: true
-          capabilities:
-            drop:
-              - ALL
+          privileged: true
         resources:
           requests:
               memory: "50Mi"
